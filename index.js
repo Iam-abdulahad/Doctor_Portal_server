@@ -40,8 +40,8 @@ async function run() {
           try {
                     await client.connect();
                     const serviceCollection = client.db('doctor_portal').collection('service');
-                    const bookingCollection = client.db('doctors_portal').collection('bookings');
-                    const userCollection = client.db('doctors_portal').collection('users');
+                    const bookingCollection = client.db('doctor_portal').collection('bookings');
+                    const userCollection = client.db('doctor_portal').collection('users');
 
                     app.get('/service', async (req, res) => {
                               const query = {};
@@ -58,7 +58,7 @@ async function run() {
                     app.get('/admin/:email', async (req, res) => {
                               const email = req.params.email;
                               const user = await userCollection.findOne({ email: email });
-                              const isAdmin = user.role === "admin";
+                              const isAdmin = user?.role === "admin";
                               res.send({ admin: isAdmin });
                     });
 
